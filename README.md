@@ -1,66 +1,60 @@
-## Foundry
+# ERC-20 Token Project
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+This project contains an ERC-20 token smart contract implemented in Solidity, along with deployment and testing scripts using Foundry.
 
-Foundry consists of:
+## Prerequisites
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+- [Foundry](https://github.com/foundry-rs/foundry) - A blazing fast, portable and modular toolkit for Ethereum application development written in Rust.
+- [Anvil](https://github.com/foundry-rs/anvil) - Local Ethereum node simulator for development and testing.
 
-## Documentation
+## Project Structure
 
-https://book.getfoundry.sh/
+- `src/MyToken.sol` - The ERC-20 token smart contract.
+- `script/DeployMyToken.s.sol` - Deployment script for the token contract.
+- `test/` - Directory containing test files.
+- `makefile` - Makefile with useful commands for building, testing, deploying, and running Anvil.
 
 ## Usage
 
-### Build
+### Start Local Ethereum Node
 
-```shell
-$ forge build
+Start the local Ethereum node simulator (Anvil) with:
+
+```bash
+make anvil
 ```
 
-### Test
+This will start Anvil with a predefined mnemonic and block time settings.
 
-```shell
-$ forge test
+### Deploy the Token Contract
+
+In a new terminal (while Anvil is running), deploy the token contract with:
+
+```bash
+make deploy
 ```
 
-### Format
+This uses Foundry's `forge` to deploy the contract to the local Anvil node.
 
-```shell
-$ forge fmt
+### Run Tests
+
+Run the test suite with:
+
+```bash
+make test
 ```
 
-### Gas Snapshots
+### Other Useful Commands
 
-```shell
-$ forge snapshot
-```
+- `make clean` - Clean the build artifacts.
+- `make build` - Build the project.
+- `make format` - Format the code using Foundry's formatter.
 
-### Anvil
+## Notes
 
-```shell
-$ anvil
-```
+- Ensure Anvil is running before deploying or running tests that require a blockchain.
+- The default private key used for deployment is set in the makefile as `DEFAULT_ANVIL_KEY`.
 
-### Deploy
+## License
 
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+This project is licensed under the MIT License.
