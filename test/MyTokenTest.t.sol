@@ -33,4 +33,20 @@ contract MyTokenTest is Test {
         // Check the balance of the "me" address
         assertEq(STARTING_BALANCE, myToken.balanceOf(me));
     }
+
+    function testAllowanceWorks() public {
+        uint256 initialAllowance = 1000 ether; 
+        //me approves you to spend tokens on me's behalf
+        vm.prank(me);
+        myToken.approve(you, initialAllowance);
+
+        uint256 transferAmount = 500;
+
+        vm.prank(you);
+        myToken.transferFrom(me, you, transferAmount);
+
+        assertEq(myToken.balanceOf(you), transferAmount);
+        assertEq(myToken.balanceOf(me), STARTING_BALANCE - transferAmount);
+    }
 }
+    
